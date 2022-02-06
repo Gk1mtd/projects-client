@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { ThemeContext } from "../App";
 
 const api = axios.create({ baseURL: "http://localhost:4000/api" });
 
@@ -13,6 +14,9 @@ function Projects() {
   React.useEffect(() => {
     getProjects();
   }, []);
+
+  const {theme, setTheme} = React.useContext(ThemeContext);
+
   return (
     <div>
       <h1>Projects</h1>
