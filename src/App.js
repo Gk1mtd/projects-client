@@ -7,9 +7,13 @@ import Projects from "./components/Projects";
 import CreateProject from "./components/CreateProject";
 import Project from "./components/Project";
 import React from "react";
+
 export const ThemeContext = React.createContext();
+export const UserContext = React.createContext();
+
 function App() {
   const [theme, setTheme] = React.useState(false);
+  const [user, setUser] = React.useState({ name: "Peter" });
   return (
     <div className={theme ? "bright" : "dark"}>
       <nav>
@@ -27,14 +31,16 @@ function App() {
         Toggle theme
       </button>
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/projects" element={<Projects />} />
-          <Route exact path="/create-project" element={<CreateProject />} />
-          <Route path="/project/:id" element={<Project />} />
-        </Routes>
+        <UserContext.Provider value={{ user, setUser }}>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/projects" element={<Projects />} />
+            <Route exact path="/create-project" element={<CreateProject />} />
+            <Route path="/project/:id" element={<Project />} />
+          </Routes>
+        </UserContext.Provider>
       </ThemeContext.Provider>
     </div>
   );
